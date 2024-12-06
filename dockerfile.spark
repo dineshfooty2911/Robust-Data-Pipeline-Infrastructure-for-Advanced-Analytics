@@ -1,0 +1,21 @@
+FROM bitnami/spark:latest
+
+USER root
+RUN mkdir -p /opt/spark-app/ /opt/spark/jars/
+WORKDIR /opt/spark-app/
+
+# Install curl
+RUN install_packages curl
+
+# Add Hadoop AWS, AWS SDK, and Iceberg dependencies
+RUN curl -o /opt/spark/jars/hadoop-aws-3.2.0.jar https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.2.0/hadoop-aws-3.2.0.jar && \
+    curl -o /opt/spark/jars/aws-java-sdk-bundle-1.11.900.jar https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.900/aws-java-sdk-bundle-1.11.900.jar && \
+    curl -o /opt/spark/jars/iceberg-spark3-runtime-1.5.2.jar https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.3_2.12/1.4.2/iceberg-spark-runtime-3.3_2.12-1.4.2-javadoc.jar && \
+    curl -o /opt/spark/jars/iceberg-aws-bundle-1.5.2.jar https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-aws/1.4.2/iceberg-aws-1.4.2-javadoc.jar && \
+    curl -o /opt/spark/jars/aws-java-sdk-core-1.11.900.jar https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.900/aws-java-sdk-core-1.11.900.jar && \
+    curl -o /opt/spark/jars/aws-java-sdk-s3-1.11.900.jar https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.900/aws-java-sdk-s3-1.11.900.jar
+
+USER 1001
+
+# Copy spark-defaults.conf
+COPY spark-conf/spark-defaults.conf /opt/spark/conf/spark-defaults.conf

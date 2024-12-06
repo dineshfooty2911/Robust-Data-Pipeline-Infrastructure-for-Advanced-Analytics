@@ -1,0 +1,12 @@
+# Dockerfile.airflow
+FROM apache/airflow:2.5.1
+
+USER airflow
+
+# Install minio and other dependencies
+RUN pip install minio
+RUN pip install kaggle
+
+
+COPY kaggle.json /home/airflow/.kaggle
+RUN chmod 600 /home/airflow/.kaggle/kaggle.json

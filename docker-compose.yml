@@ -1,0 +1,129 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    container_name: airflow-webserver
+    command: ["airflow", "webserver", "--port", "8080"]
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__WEBSERVER__RBAC: 'True'
+      AIRFLOW__CORE__FERNET_KEY: 'tHY4JtKlO6OQwHIU_7hQn3cIwsibAWb0R71WVRwC5wU='
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    container_name: airflow-scheduler
+    command: ["airflow", "scheduler"]
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    depends_on:
+      - postgres
+
+  minio:
+    image: quay.io/minio/minio
+    environment:
+      MINIO_ROOT_USER: ROOTUSER
+      MINIO_ROOT_PASSWORD: CHANGEME123
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: server /data --console-address ":9001"
+
+  spark-master:
+    build:
+      context: .
+      dockerfile: dockerfile.spark
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_CONF_DIR=/opt/spark/conf
+    ports:
+      - "8081:8080"
+      - "7077:7077"
+      - "4040:4040"
+    volumes:
+      - ./spark-app:/opt/spark-app
+      - ./spark-conf:/opt/spark/conf
+
+  spark-worker:
+    build:
+      context: .
+      dockerfile: dockerfile.spark
+    container_name: spark-worker
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_CONF_DIR=/opt/spark/conf
+    depends_on:
+      - spark-master
+    ports:
+      - "8082:8081"
+    volumes:
+      - ./spark-app:/opt/spark-app
+      - ./spark-conf:/opt/spark/conf
+
+  dremio:
+    image: dremio/dremio-oss
+    environment:
+      - DREMIO_JAVA_SERVER_HEAP_MAX=4G
+      - DREMIO_JAVA_SERVER_HEAP_MIN=4G
+    volumes:
+      - dremio_data:/var/lib/dremio
+    ports:
+      - "9047:9047"
+      - "31010:31010"
+      - "45678:45678"
+    depends_on:
+      - minio
+
+  jupyter:
+    image: jupyter/pyspark-notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - MINIO_URL=http://minio:9000
+      - MINIO_ACCESS_KEY=ROOTUSER
+      - MINIO_SECRET_KEY=CHANGEME123
+    depends_on:
+      - spark-master
+      - spark-worker
+      - minio
+
+volumes:
+  postgres_data:
+  minio_data:
+  dremio_data:

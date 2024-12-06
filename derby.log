@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed Jul 03 15:19:36 EDT 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0190-7a09-b9c1-00000461ed30 
+on database directory C:\Users\ksadi\OneDrive\Desktop\Capstone_Project\metastore_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
+Loaded from file:/C:/Spark/jars/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=20.0.1+9-29
+user.dir=c:\Users\ksadi\OneDrive\Desktop\Capstone_Project
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
