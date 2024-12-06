@@ -1,0 +1,144 @@
+{
+  "format-version" : 2,
+  "table-uuid" : "cef63b94-9fe5-4e2d-b4dd-942fa48a61bd",
+  "location" : "C:\\Users\\ksadi\\OneDrive\\Desktop\\Capstone_Project\\Warehouse/my_new_db/transport",
+  "last-sequence-number" : 2,
+  "last-updated-ms" : 1722691858951,
+  "last-column-id" : 10,
+  "current-schema-id" : 0,
+  "schemas" : [ {
+    "type" : "struct",
+    "schema-id" : 0,
+    "fields" : [ {
+      "id" : 1,
+      "name" : "Port Name",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 2,
+      "name" : "State",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 3,
+      "name" : "Port Code",
+      "required" : false,
+      "type" : "int"
+    }, {
+      "id" : 4,
+      "name" : "Border",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 5,
+      "name" : "Date",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 6,
+      "name" : "Measure",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 7,
+      "name" : "Value",
+      "required" : false,
+      "type" : "int"
+    }, {
+      "id" : 8,
+      "name" : "Latitude",
+      "required" : false,
+      "type" : "double"
+    }, {
+      "id" : 9,
+      "name" : "Longitude",
+      "required" : false,
+      "type" : "double"
+    }, {
+      "id" : 10,
+      "name" : "Point",
+      "required" : false,
+      "type" : "string"
+    } ]
+  } ],
+  "default-spec-id" : 0,
+  "partition-specs" : [ {
+    "spec-id" : 0,
+    "fields" : [ ]
+  } ],
+  "last-partition-id" : 999,
+  "default-sort-order-id" : 0,
+  "sort-orders" : [ {
+    "order-id" : 0,
+    "fields" : [ ]
+  } ],
+  "properties" : {
+    "owner" : "ksadi",
+    "write.parquet.compression-codec" : "zstd"
+  },
+  "current-snapshot-id" : 3395663497667852932,
+  "refs" : {
+    "main" : {
+      "snapshot-id" : 3395663497667852932,
+      "type" : "branch"
+    }
+  },
+  "snapshots" : [ {
+    "sequence-number" : 1,
+    "snapshot-id" : 6833775557921716587,
+    "timestamp-ms" : 1720054547724,
+    "summary" : {
+      "operation" : "append",
+      "spark.app.id" : "local-1720054198956",
+      "added-data-files" : "11",
+      "added-records" : "391800",
+      "added-files-size" : "3303454",
+      "changed-partition-count" : "1",
+      "total-records" : "391800",
+      "total-files-size" : "3303454",
+      "total-data-files" : "11",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "C:/Users/ksadi/OneDrive/Desktop/Capstone_Project/Warehouse/my_new_db/transport/metadata/snap-6833775557921716587-1-77d19209-043d-437b-b7d6-b83c2ac3ea97.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 2,
+    "snapshot-id" : 3395663497667852932,
+    "parent-snapshot-id" : 6833775557921716587,
+    "timestamp-ms" : 1722691858951,
+    "summary" : {
+      "operation" : "append",
+      "spark.app.id" : "local-1722691825883",
+      "added-data-files" : "11",
+      "added-records" : "391800",
+      "added-files-size" : "3303454",
+      "changed-partition-count" : "1",
+      "total-records" : "783600",
+      "total-files-size" : "6606908",
+      "total-data-files" : "22",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "C:/Users/ksadi/OneDrive/Desktop/Capstone_Project/Warehouse/my_new_db/transport/metadata/snap-3395663497667852932-1-445f892e-1315-4b30-bc99-ec9f49a5cda7.avro",
+    "schema-id" : 0
+  } ],
+  "statistics" : [ ],
+  "partition-statistics" : [ ],
+  "snapshot-log" : [ {
+    "timestamp-ms" : 1720054547724,
+    "snapshot-id" : 6833775557921716587
+  }, {
+    "timestamp-ms" : 1722691858951,
+    "snapshot-id" : 3395663497667852932
+  } ],
+  "metadata-log" : [ {
+    "timestamp-ms" : 1720053406922,
+    "metadata-file" : "C:/Users/ksadi/OneDrive/Desktop/Capstone_Project/Warehouse/my_new_db/transport/metadata/v1.metadata.json"
+  }, {
+    "timestamp-ms" : 1720054547724,
+    "metadata-file" : "C:/Users/ksadi/OneDrive/Desktop/Capstone_Project/Warehouse/my_new_db/transport/metadata/v2.metadata.json"
+  } ]
+}

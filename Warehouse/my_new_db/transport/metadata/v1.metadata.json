@@ -1,0 +1,86 @@
+{
+  "format-version" : 2,
+  "table-uuid" : "cef63b94-9fe5-4e2d-b4dd-942fa48a61bd",
+  "location" : "C:\\Users\\ksadi\\OneDrive\\Desktop\\Capstone_Project\\Warehouse/my_new_db/transport",
+  "last-sequence-number" : 0,
+  "last-updated-ms" : 1720053406922,
+  "last-column-id" : 10,
+  "current-schema-id" : 0,
+  "schemas" : [ {
+    "type" : "struct",
+    "schema-id" : 0,
+    "fields" : [ {
+      "id" : 1,
+      "name" : "Port Name",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 2,
+      "name" : "State",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 3,
+      "name" : "Port Code",
+      "required" : false,
+      "type" : "int"
+    }, {
+      "id" : 4,
+      "name" : "Border",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 5,
+      "name" : "Date",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 6,
+      "name" : "Measure",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 7,
+      "name" : "Value",
+      "required" : false,
+      "type" : "int"
+    }, {
+      "id" : 8,
+      "name" : "Latitude",
+      "required" : false,
+      "type" : "double"
+    }, {
+      "id" : 9,
+      "name" : "Longitude",
+      "required" : false,
+      "type" : "double"
+    }, {
+      "id" : 10,
+      "name" : "Point",
+      "required" : false,
+      "type" : "string"
+    } ]
+  } ],
+  "default-spec-id" : 0,
+  "partition-specs" : [ {
+    "spec-id" : 0,
+    "fields" : [ ]
+  } ],
+  "last-partition-id" : 999,
+  "default-sort-order-id" : 0,
+  "sort-orders" : [ {
+    "order-id" : 0,
+    "fields" : [ ]
+  } ],
+  "properties" : {
+    "owner" : "ksadi",
+    "write.parquet.compression-codec" : "zstd"
+  },
+  "current-snapshot-id" : -1,
+  "refs" : { },
+  "snapshots" : [ ],
+  "statistics" : [ ],
+  "partition-statistics" : [ ],
+  "snapshot-log" : [ ],
+  "metadata-log" : [ ]
+}
